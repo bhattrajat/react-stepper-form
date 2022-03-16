@@ -45,6 +45,7 @@ const FormTwo = () => {
             className="w-3/5 my-2 border-gray-400 rounded-r"
             placeholder="Example"
             id="workspace-url"
+            {...register('workspaceUrl')}
             type="text"
           />
         </div>

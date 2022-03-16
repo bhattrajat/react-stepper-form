@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
+import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import { StepButton } from '@mui/material'
@@ -24,6 +24,13 @@ const getStepContent = (step: number) => {
   }
 }
 
+type FormInputs = {
+  fullName: string
+  displayName: string
+  plan: string
+  workspaceName: string
+}
+
 export default function StepperForm() {
   const [activeStep, setActiveStep] = useState(0)
   const [skipped, setSkipped] = useState(new Set())
@@ -32,10 +39,10 @@ export default function StepperForm() {
   }>({})
   const [name, setName] = useState('')
   // console.log(activeStep)
-  const methods = useForm()
+  const methods = useForm<FormInputs>()
   // console.log('active step ', activeStep)
   // console.log('completed', completed)
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
     setName(data.displayName)
     handleComplete(activeStep)
     // console.log('data', data)
